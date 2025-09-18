@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فتح التقييم في خرائط جوجل</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #4285F4;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #4285F4;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.4);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .button:hover {
+            background-color: #3367D6;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.6);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .instructions {
+            background-color: #F8F9FA;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 25px;
+            text-align: right;
+        }
+        
+        .instructions h3 {
+            color: #34A853;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            text-align: right;
+            padding-right: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+            
+            .button {
+                padding: 14px 28px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMzRBODUzIiBkPSJNOTAgMjU2YzAtMTQ1LjcgMTE4LjMtMjY0IDI2NC0yNjRzMjY0IDExOC4zIDI2NCAyNjQtMTE4LjMgMjY0LTI2NCAyNjRjLTM3LjggMC03NC02LjgtMTA3LjgtMTkuNCIvPjxwYXRoIGZpbGw9IiNGQkJDMDQiIGQ9Ik0zODIgMjU2YzAtNjkuNy01Ni4zLTEyNi0xMjYtMTI2cy0xMjYgNTYuMy0xMjYgMTI2IDU2LjMgMTI2IDEyNiAxMjZjNDIuMiAwIDc5LjItMjEgMTAxLjctNTMuMiIvPjxwYXRoIGZpbGw9IiVFQTQzMzUiIGQ9Ik0zODIuNCAyMDIuOGg1OC43djU4LjdIMzgyLjR6Ii8+PHBhdGggZmlsbD0iIzQyODVGNCIgZD0iTTM0Ni4xIDM0Mi40YzguOC0xMC40IDE0LTIzLjUgMTQtMzcuOCAwLTMwLjUtMjQuNy01NS4yLTU1LjItNTUuMi0xNC4zIDAtMjcuNCA1LjEtMzcuOCAxNGwtMjEuOS0yMS45YzE3LjEtMTcuMSA0MC43LTI3LjYgNjUuNy0yNy42IDQ5LjYgMCA5MCA0MC40IDkwIDkwIDAgMjUtMTAuNSA0OC42LTI3LjYgNjUuN3oiLz48L3N2Zz4=" alt="Google Maps Logo" class="logo">
+        
+        <h1>فتح التقييم في خرائط جوجل</h1>
+        
+        <p>انقر على الزر أدناه لفتح صفحة التقييم مباشرة في تطبيق خرائط جوجل على هاتفك المحمول.</p>
+        
+        <a href="https://g.page/r/CR6gCh0LXEk8EBE/review" class="button" id="openMapsButton">فتح التقييم في خرائط جوجل</a>
+        
+    <script>
+        document.getElementById('openMapsButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // محاولة فتح التطبيق مباشرة
+            window.location.href = 'comgooglemaps://?q=https://g.page/r/CR6gCh0LXEk8EBE/review';
+            
+            // إذا لم يفتح التطبيق، نعود للرابط العادي بعد تأخير
+            setTimeout(function() {
+                window.location.href = 'https://g.page/r/CR6gCh0LXEk8EBE/review';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
