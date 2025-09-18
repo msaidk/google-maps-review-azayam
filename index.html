@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فتح التقييم في خرائط جوجل</title>
+    <title>التوجيه إلى خرائط جوجل</title>
     <style>
         * {
             box-sizing: border-box;
@@ -14,7 +14,7 @@
         
         body {
             background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
-            color: #333;
+            color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -25,7 +25,8 @@
         }
         
         .container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             padding: 30px;
@@ -44,6 +45,13 @@
             font-size: 18px;
             line-height: 1.6;
             color: #555;
+        }
+        
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #EA4335;
+            margin: 20px 0;
         }
         
         .button {
@@ -73,32 +81,24 @@
             transform: translateY(0);
         }
         
-        .instructions {
-            background-color: #F8F9FA;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 25px;
-            text-align: right;
-        }
-        
-        .instructions h3 {
-            color: #34A853;
-            margin-bottom: 15px;
-        }
-        
-        .instructions ol {
-            text-align: right;
-            padding-right: 20px;
-        }
-        
-        .instructions li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        
         .logo {
             width: 100px;
             margin-bottom: 20px;
+        }
+        
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #4285F4;
+            width: 50px;
+            height: 50px;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         @media (max-width: 600px) {
@@ -125,24 +125,55 @@
     <div class="container">
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMzRBODUzIiBkPSJNOTAgMjU2YzAtMTQ1LjcgMTE4LjMtMjY0IDI2NC0yNjRzMjY0IDExOC4zIDI2NCAyNjQtMTE4LjMgMjY0LTI2NCAyNjRjLTM3LjggMC03NC02LjgtMTA3LjgtMTkuNCIvPjxwYXRoIGZpbGw9IiNGQkJDMDQiIGQ9Ik0zODIgMjU2YzAtNjkuNy01Ni4zLTEyNi0xMjYtMTI2cy0xMjYgNTYuMy0xMjYgMTI2IDU2LjMgMTI2IDEyNiAxMjZjNDIuMiAwIDc5LjItMjEgMTAxLjctNTMuMiIvPjxwYXRoIGZpbGw9IiVFQTQzMzUiIGQ9Ik0zODIuNCAyMDIuOGg1OC43djU4LjdIMzgyLjR6Ii8+PHBhdGggZmlsbD0iIzQyODVGNCIgZD0iTTM0Ni4xIDM0Mi40YzguOC0xMC40IDE0LTIzLjUgMTQtMzcuOCAwLTMwLjUtMjQuNy01NS4yLTU1LjItNTUuMi0xNC4zIDAtMjcuNCA1LjEtMzcuOCAxNGwtMjEuOS0yMS45YzE3LjEtMTcuMSA0MC43LTI3LjYgNjUuNy0yNy42IDQ5LjYgMCA5MCA0MC40IDkwIDkwIDAgMjUtMTAuNSA0OC42LTI3LjYgNjUuN3oiLz48L3N2Zz4=" alt="Google Maps Logo" class="logo">
         
-        <h1>فتح التقييم في خرائط جوجل</h1>
+        <h1>جاري التوجيه إلى خرائط جوجل</h1>
         
-        <p>انقر على الزر أدناه لفتح صفحة التقييم مباشرة في تطبيق خرائط جوجل على هاتفك المحمول.</p>
+        <p>سيتم تحويلك تلقائياً إلى تطبيق خرائط جوجل لفتح صفحة التقييم.</p>
         
-        <a href="https://g.page/r/CR6gCh0LXEk8EBE/review" class="button" id="openMapsButton">فتح التقييم في خرائط جوجل</a>
+        <div class="loader"></div>
         
+        <div class="countdown" id="countdown">5</div>
+        
+        <p>إذا لم يتم التوجيه تلقائياً، يرجى النقر على الزر أدناه:</p>
+        
+        <a href="https://g.page/r/CR6gCh0LXEk8EBE/review" class="button" id="manualButton">فتح التقييم يدوياً</a>
+    </div>
+
     <script>
-        document.getElementById('openMapsButton').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // محاولة فتح التطبيق مباشرة
+        // محاولة فتح تطبيق خرائط جوجل مباشرة
+        function openGoogleMaps() {
+            // محاولة فتح تطبيق خرائط جوجل (لأجهزة iOS وAndroid)
             window.location.href = 'comgooglemaps://?q=https://g.page/r/CR6gCh0LXEk8EBE/review';
             
-            // إذا لم يفتح التطبيق، نعود للرابط العادي بعد تأخير
+            // إذا لم يفتح التطبيق خلال وقت معين، نعود للرابط العادي
             setTimeout(function() {
                 window.location.href = 'https://g.page/r/CR6gCh0LXEk8EBE/review';
-            }, 200);
+            }, 2000);
+        }
+        
+        // بدء العد التنازلي
+        let count = 2;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdownInterval = setInterval(function() {
+            count--;
+            countdownElement.textContent = count;
+            
+            if (count <= 0) {
+                clearInterval(countdownInterval);
+                openGoogleMaps();
+            }
+        }, 1000);
+        
+        // فتح التطبيق عند النقر على الزر أيضاً
+        document.getElementById('manualButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            openGoogleMaps();
         });
+        
+        // محاولة فتح التطبيق فور تحميل الصفحة (لأجهزة Android)
+        window.onload = function() {
+            openGoogleMaps();
+        };
     </script>
 </body>
 </html>
